@@ -8,11 +8,24 @@ from wiki_table_test.models import CompanyInfo
 
 @pytest.fixture(scope="session")
 def fetch_html_wiki_table() -> BeautifulSoup:
+    """
+    Fetches and parses the Wiki Table page.
+
+    :return: BeautifulSoup object as a parsed HTML.
+    """
     url = requests.get(constants.table_url)
     return BeautifulSoup(url.text, "html.parser")
 
 
 def parse_wiki_table(soup: BeautifulSoup) -> list[CompanyInfo]:
+    """
+    Method to parse Wikipedia table.
+    Method ignores the first one row in the table, because it is a header of table, and we don't need it.
+    Each row turns into CompanyInfo object for better working with it.
+
+    :param soup: BeautifulSoup object.
+    :return: List of CompanyInfo objects from Wikipedia table.
+    """
     table = soup.find("table")
     parsed_data = []
 
@@ -34,6 +47,12 @@ def parse_wiki_table(soup: BeautifulSoup) -> list[CompanyInfo]:
 
 
 def clean_text(element: Tag) -> str:
+    """
+    Method to clean text from Wikipedia table (Remove all hyperlinks, superscript references and extra whitespace).
+
+    :param element: Tag object.
+    :return: Cleaned text from Wikipedia column.
+    """
     for a_tag in element.find_all("a"):
         a_tag.unwrap()
     for sup_tag in element.find_all("sup", class_="reference"):
@@ -43,4 +62,10 @@ def clean_text(element: Tag) -> str:
 
 @pytest.fixture(scope="session")
 def wiki_table_data(fetch_html_wiki_table) -> list[CompanyInfo]:
+    """
+    Parses the Wikipedia table data and returns it as a list of CompanyInfo objects.
+
+    :param fetch_html_wiki_table: BeautifulSoup object.
+    :return: List of CompanyInfo objects.
+    """
     return parse_wiki_table(fetch_html_wiki_table)

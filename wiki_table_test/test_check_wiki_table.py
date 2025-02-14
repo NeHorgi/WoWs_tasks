@@ -5,6 +5,12 @@ parameters_for_test = [10 ** 7, 1.5 * 10 ** 7, 5 * 10 ** 7, 10 ** 8, 5 * 10 ** 8
 
 @pytest.mark.parametrize('parameter', parameters_for_test)
 def test_parametrize_task_1(parameter, wiki_table_data):
+    """
+    Test checks that all rows in Wikipedia table have bigger value in column "Population" than the given value.
+
+    :param parameter: Value to check.
+    :param wiki_table_data: List of CompanyInfo objects as a data from Wikipedia table.
+    """
     errors = []
     for table_row in wiki_table_data:
         if parameter > table_row.popularity:

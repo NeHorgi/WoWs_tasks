@@ -4,6 +4,24 @@ import random
 
 
 class Map:
+    """
+    A Class for working with simple 2D map as a list of lists with strings.
+
+    Attributes:
+        __length (int): The number of rows in the map.
+        __width (int): The number of columns in the map.
+        __land_percent (float): The percentage of land coverage on the map.
+        __map_type (int): The type of map generation:
+            1 - Randomly scattered land tiles.
+            2 - Clustered islands.
+            3 - Centralized landmass.
+        __map (list[list[str]]): The map.
+
+    Examples:
+
+        Map(length=10, width=10, percentage=30, type_of_map=1)
+
+    """
 
     def __init__(self, length, width, land_percent, map_type):
         self.__length = length
@@ -13,18 +31,31 @@ class Map:
         self.__map = None
 
     @property
-    def map(self):
+    def map(self) -> list[list[str]] | None:
+        """
+        Property that returns the generated map if it exists.
+
+        :return: The generated map as a list of lists with strings, or None if not generated.
+        """
         if self.__map:
             return self.__map
         else:
             print("Map is not created yet.")
 
     def show_map(self):
+        """
+        Method that prints the generated map.
+        """
         if self.map:
             for row in self.map:
                 print(row)
 
-    def generate_map(self):
+    def generate_map(self) -> list[list[str]]:
+        """
+        Method that generates a map with randomly scattered land tiles.
+
+        :return: Updated map with randomly scattered land tiles as a list of lists with strings.
+        """
         if not self.__map:
             self.__map = [['~' for _ in range(self.__width)] for _ in range(self.__length)]
             total_cells = self.__length * self.__width
@@ -58,10 +89,24 @@ class Map:
             print("Map was already created, it is not needed to create it again.")
 
     @staticmethod
-    def shortest_way(a, b):
-        return abs(a[0] - b[0]) + abs(a[1] - b[1])
+    def shortest_way(start: tuple[int, int], finish: tuple[int, int]) -> int:
+        """
+        Computes the Manhattan distance between two points on the map.
 
-    def find_path(self, start, finish):
+        :param start: Start coordinate (x, y).
+        :param finish: Finish coordinate (x, y).
+        :return: The Manhattan distance between start and finish.
+        """
+        return abs(start[0] - finish[0]) + abs(start[1] - finish[1])
+
+    def find_path(self, start, finish) -> list[tuple[int, int]] | None:
+        """
+        Finds the shortest path between two points using the A* algorithm.
+
+        :param start: Start coordinate (x, y).
+        :param finish: Finish coordinate (x, y).
+        :return: The shortest path between start and finish if it exists.
+        """
         if self.__map is None:
             print("Error: Map is not created yet.")
             return None

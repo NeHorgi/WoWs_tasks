@@ -1,6 +1,22 @@
 from looking_for_a_way_task.map import Map
 
 
+def generate_tuple_with_coords(coords: str) -> tuple:
+    """
+    Method to create a tuple with coords from given string.
+
+    :param coords: String with coordinates by user.
+    :return: Tuple of coordinates.
+    """
+    result = ()
+    for item in coords:
+        if not item.isdigit():
+            continue
+        else:
+            result += (int(item),)
+    return result
+
+
 def main():
     print("Hello!")
     print("Choose length.")
@@ -15,9 +31,9 @@ def main():
     map.generate_map()
     map.show_map()
     print("Choose start coordinates. For example: (0, 1)")
-    start = tuple(input())
+    start = generate_tuple_with_coords(input())
     print("Choose finish coordinates. For example: (9, 9)")
-    finish = tuple(input())
+    finish = generate_tuple_with_coords(input())
     map.find_path(start, finish)
     map.show_map()
 

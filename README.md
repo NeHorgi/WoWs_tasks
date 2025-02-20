@@ -18,6 +18,7 @@ cd WoWs_tasks
 ```
 
 - Create and activate a virtual environment (optional but recommended):
+
 For Windows (Git Bash):
 ```bash
 python -m venv venv

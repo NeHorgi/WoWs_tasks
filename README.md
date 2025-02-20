@@ -40,15 +40,27 @@ pip install -r requirements.txt
 
 *task_with_db_working*
 
-To execute the test suite, use the following command:
 ```bash
-pytest
+cd .\task_with_db_working\
 ```
 
-To run only the ship component validation tests:
+Open fill_database.py and run the script
+Open test_check_ships_parameters.py and run tests
+
+*looking_for_a_way_task*
+
 ```bash
-pytest -k "test_ship_components_change"
+cd .\looking_for_a_way_task\
 ```
+
+Open start.py and run the script
+
+*wiki_table_test*
+```bash
+cd .\wiki_table_test\
+```
+
+Open test_check_wiki_table.py.py and run the test
 
 **Contacts**
 

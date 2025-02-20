@@ -35,6 +35,20 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+**Running code**
+
+*task_with_db_working*
+
+To execute the test suite, use the following command:
+```bash
+pytest
+```
+
+To run only the ship component validation tests:
+```bash
+pytest -k "test_ship_components_change"
+```
+
 **Contacts**
 
 Email: lesha.hodus@gmail.com LinkedIn: Aleksei Khodus

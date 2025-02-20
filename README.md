@@ -60,7 +60,7 @@ Open start.py and run the script
 cd .\wiki_table_test\
 ```
 
-Open test_check_wiki_table.py.py and run the test
+Open test_check_wiki_table.py and run the test
 
 **Contacts**
 
